@@ -1,0 +1,5 @@
+.weekcontainer{
+    width: 70%;
+    display: flex;  
+    align-content: center;
+}
