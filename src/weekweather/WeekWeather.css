@@ -1,5 +1,5 @@
 .weekcontainer{
-    width: 70%;
+    width: 800px;
     display: flex;  
-    align-content: center;
+    justify-content: space-between;
 }

@@ -8,7 +8,7 @@ function DailyWeather () {
 
     const {locationData, loading} = React.useContext(WeatherContext)
 
-    console.log(locationData)
+    
     return (
         <div className="dailycontainer">
             {!loading && <div><WiCloud className="cloud">

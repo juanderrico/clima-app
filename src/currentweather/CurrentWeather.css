@@ -1,5 +1,25 @@
 .container{
-    width: 30%;
+    display: flex;
+    width: 300px;
+    font-family: Georgia, serif;
     height: 800px;
-    background-color: darkblue;
+    background-color:lightslategray;
+}
+.img {
+    height: 200px;
+    width: 100%;
+}
+.currentH {
+    align-self: center;
+    margin-left: 8px;
+    font-size: 24px;
+}
+.weathercode{
+    align-self: center;
+    margin-left: 24px;
+}
+.currentC{
+    display: flex;
+    
+    flex-direction: column;
 }
