@@ -19,7 +19,7 @@ function WeatherProvider(props){
   
   const [loading, setLoading] = React.useState(true);
   const cities = ["Berlin", "Paris","London","Madrid","Vienna","Brussels","Moscow","Sofia","Copenhagen","Athens","Budapest","Reykjavik","Dublin","Rome","Amsterdam","Oslo","Warsaw","Lisabon","Bern","Kiev","Stockholm","Washington","New York","Sacramento","Los angeles","Chicago","Houston","Phoenix","Philadelphia","Vancouver","Ottawa","Buenos Aires","Brasilia","Santiago","Bogota","Ciudad de Mexico","Asuncion","Lima","Montevideo","Kabul","Dhaka","Peking","Tiflis","New Delhi","Jakarta","Teheran","Baghdad","Jerusalem","Tokyo","Kuala Lumpur","Ulan Bator","Kathmandu","Singapure","Seoul","Ankara","Abu Dhabi","Algiers","Luanda","Cairo","Nairobi","Tripoli","WindHoek","Pretoria","Canberra","Wellington"]
-  const [selectedCity, setCity] = React.useState("")
+  const [selectedCity, setCity] = React.useState("Berlin")
 
   let latitude= 0;
   let longitude= 0;

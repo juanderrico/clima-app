@@ -46,4 +46,25 @@ function renderImage (locationData, loading,index,styles) {
           return{weathercode:"Tormentas" ,image:<WiThunderstorm className={styles}/>}
    }}}
 
-export {renderImage}
+   function weekday(date){
+    switch(date){
+        case 0:
+            return "Domingo"
+        case 1:
+            return "Lunes"
+        case 2:
+            return "Martes"
+        case 3:
+            return "Miercoles"
+        case 4:
+            return "Jueves"
+        case 5:
+            return "Viernes"
+        case 6:
+            return "Sabado"
+
+    }
+    return
+   }
+
+export {renderImage, weekday}
