@@ -1,84 +1,47 @@
 import React from "react";
-import "./CurrentWeather.css"
+import { useEffect, useState } from "react";
+import styles from "./CurrentWeather.module.css"
 import { WeatherContext } from "../weathercontext/WeatherContext.js";
 import { WiCloud, WiCloudy,WiDaySunny, WiFog, WiSprinkle, WiThunderstorm,WiRain,WiSnow,WiShowers,WiSnowWind } from "react-icons/wi";
-
+import {renderImage} from "../weathercontext/setimage.js"
 function CurrentWeather({setOpenModal}){
     const onClick= ()=> {
         setOpenModal(true)
     }
     const d = new Date();
     let hour = d.getHours();
-    const {locationData,loading} = React.useContext(WeatherContext)
-    let weathercode= ""
-  
-    const renderImage = () =>{if(!loading){
-        switch(locationData.daily.weathercode[0]){
-            case 0: 
-                weathercode= "Soleado"
-                return <WiDaySunny className="img"/>;
-            case 1:
-            case 2: 
-                weathercode="Parcialmente nublado"
-                return <WiCloud className="img"/>;
-            case 3: 
-                weathercode="Nublado"
-                return <WiCloudy className="img"/>;
-            case 45:
-            case 48:
-                weathercode="Niebla"
-                return <WiFog className="img"/>
-            case 51: 
-            case 53: 
-            case 55:
-            case 56:
-            case 57:
-                weathercode="Llovizna"
-                return <WiSprinkle className="img"/>
-            case 61:
-            case 63:
-            case 65:
-            case 66:
-            case 67:
-                weathercode="Lluvia"
-                return <WiRain className="img"/>
-            case 71:
-            case 73:
-            case 75:
-            case 77:
-                weathercode="Nieve"
-                return <WiSnow className="img"/>
-            case 80:
-            case 81:
-            case 82:
-                weathercode="Chaparrones"
-                return <WiShowers className="img"/>
-            case 85:
-            case 86:
-                weathercode="Nieve fuerte"
-                return <WiSnowWind className="img"/>
-            case 95:
-            case 96: 
-            case 99:
-                weathercode="Tormentas"
-                return <WiThunderstorm className="img"/>
-         }}
-    }
+    
+    const {locationData,loading,selectedCity} = React.useContext(WeatherContext)
+    let response={weathercode:"", image:<WiCloud></WiCloud>};
+    
+    const [weathercode,setWeatherCode]=React.useState("")
+    const [image,setimage]=React.useState("<WiCloud></WiCloud>")
+   
+    
+    useEffect(()=>{
+    if(!loading){
+    response= renderImage(locationData, loading,0,styles.img)
+    setWeatherCode(response.weathercode)
+    setimage(response.image)}
+    },[locationData])
+
+    
     
     
     
 
     return (
 
-        <div className="container">
-            <button className="openModal" onClick={onClick}>Seleccionar ciudad</button>
-            {!loading && <div className="currentC">
+        <div className={styles.container}>
+            <button className={styles.openModal} onClick={onClick}>Seleccionar ciudad</button>
+            {!loading && <div className={styles.currentC}>
             <div>
-            {renderImage()}
+            {image}
                 </div>
-            <h2 className="weathercode">{weathercode}</h2>
+            <h2 className={styles.weathercode}>{weathercode}</h2>
                
-            <h2 className="currentH">{Math.round(locationData.hourly.temperature_2m[0])}°C</h2>
+            <h2 className={styles.currentH}>{Math.round(locationData.hourly.temperature_2m[hour])}°C</h2>
+            <h3>Hoy- {hour}:00 - {selectedCity.value}</h3>
             
             </div>}
         </div>

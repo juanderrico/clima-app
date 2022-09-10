@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 const WeatherContext= React.createContext();
 
 function WeatherProvider(props){
-  let currentDate = new Date();
-  const day = String(currentDate.getDate()).padStart(2, '0');
-  const month = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-  const year = currentDate.getFullYear();
-  currentDate =`${year}-${month}-${day}`
-  const maxDate = `${year}-${month}-${day+6}`
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+  const year = date.getFullYear();
+  const currentDate =`${year}-${month}-${day}`
+  let maxDate = new Date(date);
+  const nday= maxDate.getDate()+6
+  maxDate=`${year}-${month}-${nday}`
+ 
+
 
   const [locationData, setlocationData] = React.useState([])
   
@@ -34,7 +38,7 @@ function WeatherProvider(props){
       return citiesFilter.includes(searchFilter)
     })
   }//filtra en el array para buscar la ciudad que se esta buscando
-
+  let tUnit="celsius"
   
   
   useEffect(()=> {
@@ -300,7 +304,7 @@ function WeatherProvider(props){
         latitude=-41.28;
       break;
     }
-    const API= `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation&daily=weathercode,apparent_temperature_max,apparent_temperature_min&timezone=auto&start_date=${currentDate}&end_date=2022-09-15`;
+    const API= `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation,weathercode&daily=weathercode,apparent_temperature_max,apparent_temperature_min&temperature_unit=${tUnit}&timezone=auto&start_date=${currentDate}&end_date=${maxDate}`;
       fetch(`${API}`)
       . then(response=>response.json())
       .then((data)=>{

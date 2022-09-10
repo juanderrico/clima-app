@@ -1,7 +1,7 @@
 .container{
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 30%;
     font-family: Georgia, serif;
     height: 800px;
     background-color:lightslategray;
@@ -12,12 +12,12 @@
 }
 .currentH {
     align-self: center;
-    margin-left: 8px;
+    
     font-size: 24px;
 }
 .weathercode{
     align-self: center;
-    margin-left: 24px;
+    
 }
 .currentC{
     display: flex;
@@ -33,4 +33,8 @@
     border-color: lightslategray ;
     margin-left: 8px;
     margin-top: 20px;
+}
+h3{
+    align-self: center;
+    font-size: 14px;
 }

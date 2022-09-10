@@ -1,6 +1,6 @@
 import React from "react";
 import { WeatherContext } from "../weathercontext/WeatherContext.js";
-import "./SearchBar.css"
+import styles from "./SearchBar.module.css"
 function SearchBar({setOpenModal}){
     const {setSearchValue, searchValue,setLoading, searchResults, setCity, selectedCity} = React.useContext(WeatherContext)
 const onValueChange= (event) => {
@@ -15,9 +15,9 @@ const onSelect= (value) =>{
 let list=[]
 searchResults.map((value)=>{
     list.push(
-    <button className="city" onClick={()=>onSelect({value})}>{value}</button>)
+    <button className={styles.city} onClick={()=>onSelect({value})}>{value}</button>)
 })
-return (<div className="ModalBackground"><input className="searchInput" value={searchValue} onChange={onValueChange}></input>
+return (<div className={styles.ModalBackground}><input className={styles.searchInput} value={searchValue} onChange={onValueChange}></input>
 {list}</div>
 )
 }
