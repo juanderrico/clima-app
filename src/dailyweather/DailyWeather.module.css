@@ -3,9 +3,8 @@
     height: 50px;
 }
 .dailycontainer{
-    width: 20%;
+    width: 100%;
     height: 100px;
-    margin: 8px;
     background-color: rgba(11, 105, 245, 0.993);
     display: flex;
     justify-content: center;
@@ -24,4 +23,9 @@ align-content: center;
 .weekday{
     font-size: 12px;
     margin: 0;
+}
+.selectDay{
+    background: transparent;
+    border: none !important;
+    width: 20%;
 }

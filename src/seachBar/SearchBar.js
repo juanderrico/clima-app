@@ -9,7 +9,7 @@ const onValueChange= (event) => {
 const onSelect= (value) =>{
     setCity(value)
     setOpenModal(false)
-    setLoading(false)
+    
 
 }
 let list=[]

@@ -2,7 +2,8 @@ import React  from "react";
 import { useEffect, useState } from "react";
 import './App.css';
 import { CurrentWeather } from "./currentweather/CurrentWeather.js";
-import {WeekWeather} from "./weekweather/WeekWeather.js"
+import {WeekWeather} from "./weekweather/WeekWeather.js";
+import { SelectedDayWeather } from "./selectedDayWeather/SelectedDayWeather";
 import { SearchBar } from "./seachBar/SearchBar";
 import {SelectLocation} from "./selectLocation/SelectLocation.js"
 import {WeatherContext, WeatherProvider} from "./weathercontext/WeatherContext.js"
@@ -11,9 +12,10 @@ function App() {
   return (
     <WeatherProvider>
       <WeatherContext.Consumer>
-        {value =>(<div className="main">
+        {value =>(<div className="main"><div className="upperSide">
       <CurrentWeather setOpenModal={setOpenModal}></CurrentWeather>
-      <WeekWeather ></WeekWeather>
+      <WeekWeather ></WeekWeather></div>
+      <SelectedDayWeather></SelectedDayWeather>
       {openModal && <SelectLocation><SearchBar setOpenModal={setOpenModal}></SearchBar></SelectLocation>}
     </div>
     )}
