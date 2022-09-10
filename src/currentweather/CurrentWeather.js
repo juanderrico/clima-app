@@ -3,12 +3,15 @@ import "./CurrentWeather.css"
 import { WeatherContext } from "../weathercontext/WeatherContext.js";
 import { WiCloud, WiCloudy,WiDaySunny, WiFog, WiSprinkle, WiThunderstorm,WiRain,WiSnow,WiShowers,WiSnowWind } from "react-icons/wi";
 
-function CurrentWeather(){
+function CurrentWeather({setOpenModal}){
+    const onClick= ()=> {
+        setOpenModal(true)
+    }
     const d = new Date();
     let hour = d.getHours();
     const {locationData,loading} = React.useContext(WeatherContext)
     let weathercode= ""
-    console.log(weathercode)
+  
     const renderImage = () =>{if(!loading){
         switch(locationData.daily.weathercode[0]){
             case 0: 
@@ -68,6 +71,7 @@ function CurrentWeather(){
     return (
 
         <div className="container">
+            <button className="openModal" onClick={onClick}>Seleccionar ciudad</button>
             {!loading && <div className="currentC">
             <div>
             {renderImage()}

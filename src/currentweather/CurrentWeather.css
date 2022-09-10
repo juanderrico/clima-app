@@ -1,5 +1,6 @@
 .container{
     display: flex;
+    flex-direction: column;
     width: 300px;
     font-family: Georgia, serif;
     height: 800px;
@@ -22,4 +23,14 @@
     display: flex;
     
     flex-direction: column;
+}
+.openModal{
+    width: 100px;
+    font-family: Georgia, serif;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: aquamarine;
+    border-color: lightslategray ;
+    margin-left: 8px;
+    margin-top: 20px;
 }
