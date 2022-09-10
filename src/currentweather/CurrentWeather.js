@@ -11,7 +11,7 @@ function CurrentWeather({setOpenModal}){
     const d = new Date();
     let hour = d.getHours();
     
-    const {locationData,loading,selectedCity} = React.useContext(WeatherContext)
+    const {locationData,loading,selectedCity,unitLetter} = React.useContext(WeatherContext)
     let response={weathercode:"", image:<WiCloud></WiCloud>};
     
     const [weathercode,setWeatherCode]=React.useState("")
@@ -40,7 +40,7 @@ function CurrentWeather({setOpenModal}){
                 </div>
             <h2 className={styles.weathercode}>{weathercode}</h2>
                
-            <h2 className={styles.currentH}>{Math.round(locationData.hourly.temperature_2m[hour])}°C</h2>
+            <h2 className={styles.currentH}>{Math.round(locationData.hourly.temperature_2m[hour])}°{unitLetter}</h2>
             <h3>Hoy- {hour}:00 - {selectedCity.value}</h3>
             
             </div>}

@@ -38,7 +38,13 @@ function WeatherProvider(props){
       return citiesFilter.includes(searchFilter)
     })
   }//filtra en el array para buscar la ciudad que se esta buscando
-  let tUnit="celsius"
+  const [tUnit,settUnit]=React.useState("celsius")
+  let unitLetter="C"
+  if(tUnit==="celsius"){
+    unitLetter="C"
+  } else{
+    unitLetter="F"
+  }
   
   
   useEffect(()=> {
@@ -310,9 +316,10 @@ function WeatherProvider(props){
       .then((data)=>{
         setlocationData(data)
         setLoading(false)
+
         
     })
-},[selectedCity])//llama a la api, y se asegura que los componentes que tengan loading no sean cargados antes de que se reciba la api
+},[selectedCity,tUnit])//llama a la api, y se asegura que los componentes que tengan loading no sean cargados antes de que se reciba la api
 
 
     return (
@@ -325,7 +332,10 @@ function WeatherProvider(props){
             searchResults,
             setCity,
             selectedCity,
-            setLoading
+            setLoading,
+            settUnit,
+            unitLetter,
+            tUnit
         }}>{props.children}</WeatherContext.Provider>
     )
 }
