@@ -34,8 +34,8 @@ function DailyWeather ({index}) {
         <div className={styles.dailycontainer}>
             {!loading && <div><h2 className={styles.weekday }>{dayoftheweek}</h2>{image}
             <div className={styles.temperaturediv}>
-            <h2>{Math.round(locationData.daily.apparent_temperature_max[index])}°{unitLetter}</h2>
-            <h2>{Math.round(locationData.daily.apparent_temperature_min[index])}°{unitLetter}</h2>
+            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_max[index])}°{unitLetter}</h2>
+            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_min[index])}°{unitLetter}</h2>
              </div></div>}
         </div></button>
     )

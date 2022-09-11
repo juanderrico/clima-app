@@ -14,6 +14,11 @@
 .dato{
     font-size: 18px;
 }
+.title{
+    text-align: center;
+    color: white;
+    font-size: 28px;
+}
 .wind{
     width: 40px;
     height: 40px;
@@ -21,4 +26,13 @@
 }
 .windDato{margin: 0;
     font-size: 18px;    }
+
+@media(width <= 720px){
+    .windDato{
+        font-size: 14px;
+    }
+    .dato{
+        font-size: 14px;
+    }
+}
 

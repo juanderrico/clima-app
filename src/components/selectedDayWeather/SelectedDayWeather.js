@@ -20,7 +20,9 @@ function SelectedDayWeather(){
     return(
 
     <div>
+        <h1 className={styles.title}>Datos del dia seleccionado:</h1>
         {!loading && <div className={styles.container}>
+            
         <div className={styles.datocontainer}>
             <h1 className={styles.dato}>Horas de precipitacion:</h1>
             <h1 className={styles.dato} >{locationData.daily.precipitation_hours[selectedDayIndex]} horas</h1>

@@ -12,3 +12,8 @@ html{
   width: 100%;
   height: 100%;
 }
+@media(width <= 720px){
+  .upperSide{
+    flex-direction: column;
+  }
+}

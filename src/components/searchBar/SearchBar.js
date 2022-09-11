@@ -17,8 +17,13 @@ searchResults.map((value)=>{
     list.push(
     <button className={styles.city} onClick={()=>onSelect({value})}>{value}</button>)
 })
-return (<div className={styles.ModalBackground}><input className={styles.searchInput} value={searchValue} onChange={onValueChange}></input>
-{list}<button className={styles.cancelbutton} onClick={()=>setOpenModal(false)}>X</button></div>
+return (<div className={styles.ModalBackground}>
+    <div className={styles.citiesList}>
+    <h1 className={styles.upperText}>Escoja una ciudad</h1>
+    <input className={styles.searchInput} value={searchValue} onChange={onValueChange}>
+    </input>
+{list}</div>
+<button className={styles.cancelbutton} onClick={()=>setOpenModal(false)}>X</button></div>
 )
 }
 
