@@ -28,8 +28,7 @@ function CurrentWeather({setOpenModal}){
     response= renderImage(locationData, loading,0,styles.img)
     setWeatherCode(response.weathercode)
     setbackgroundColor(setbackground(response.weathercode))
-    console.log(weathercode)
-    console.log(backgroundColor)
+   
     setimage(response.image)}
     },[locationData])
 
