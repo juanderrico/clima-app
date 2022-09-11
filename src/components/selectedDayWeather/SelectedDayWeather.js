@@ -1,27 +1,32 @@
 import React from "react";
 import { WeatherContext } from "../weathercontext/WeatherContext";
 import styles from "./SelectedDayWeather.module.css"
-import {windDirection} from "../weathercontext/setimage.js"
+import {windDirection, weekday} from "../weathercontext/setimage.js"
 import { useEffect, useState } from "react";
 function SelectedDayWeather(){
     const [windImage, setWindImage]= React.useState()
-    const {locationData, selectedDayIndex, loading} = React.useContext(WeatherContext)
-    const [windDir,setWindDirection]= React.useState()
+    const {locationData, selectedDayIndex, loading, selectedDayDate} = React.useContext(WeatherContext)
+    const [windDir,setWindDirection]= React.useState();
+    const [selectedDay,setselectedDay]= React.useState();
+    
+    let day= new Date(selectedDayDate);
     let response;
     useEffect(()=>{
         if(!loading){
-            
+            setselectedDay(weekday(day.getDay()))
             response=windDirection(locationData.daily.winddirection_10m_dominant[selectedDayIndex],styles.wind)
             setWindDirection(response.direction)
             setWindImage(response.image)
             }},[selectedDayIndex,locationData])
 
-   
+            
     return(
 
-    <div>
+    <div>{!loading &&
+        <div>
         <h1 className={styles.title}>Datos del dia seleccionado:</h1>
-        {!loading && <div className={styles.container}>
+        <h1 className={styles.date}>{locationData.daily.time[selectedDayIndex]}-{selectedDay}</h1>
+          <div className={styles.container}>
             
         <div className={styles.datocontainer}>
             <h1 className={styles.dato}>Horas de precipitacion:</h1>
@@ -40,7 +45,7 @@ function SelectedDayWeather(){
             {windImage}
             <h1 className={styles.windDato} >{windDir}</h1></div>
 
-        </div>}
+        </div></div>}
     </div>)
 }
 

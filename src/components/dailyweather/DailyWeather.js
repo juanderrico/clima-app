@@ -8,7 +8,7 @@ import {WiCloudy,WiDaySunny, WiFog, WiSprinkle, WiThunderstorm,WiRain,WiSnow,WiS
 
 function DailyWeather ({index}) {
 
-    const {locationData, loading,unitLetter, setSelectedIndex} = React.useContext(WeatherContext)
+    const {locationData, loading,unitLetter, setSelectedIndex, setSelectedDayDate} = React.useContext(WeatherContext)
     let response={weathercode:"", image:<WiCloud></WiCloud>};
     const [dayoftheweek,setDay]=React.useState("")
     
@@ -30,7 +30,8 @@ function DailyWeather ({index}) {
         },[locationData])
     
     return (
-        <button className={styles.selectDay} onClick={()=>{setSelectedIndex(index)}}>
+        <button className={styles.selectDay} onClick={()=>{setSelectedIndex(index)
+            setSelectedDayDate(currentDate)}}>
         <div className={styles.dailycontainer}>
             {!loading && <div><h2 className={styles.weekday }>{dayoftheweek}</h2>{image}
             <div className={styles.temperaturediv}>

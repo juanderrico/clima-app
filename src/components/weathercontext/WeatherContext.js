@@ -16,11 +16,14 @@ function WeatherProvider(props){
  
 
   const [selectedDayIndex,setSelectedIndex]=React.useState(0)
+
   
   const [locationData, setlocationData] = React.useState([])
-  
+  const [selectedDayDate, setSelectedDayDate]= React.useState(currentDate)
   const [loading, setLoading] = React.useState(true);
   const cities = ["Berlin", "Paris","London","Madrid","Vienna","Brussels","Moscow","Sofia","Copenhagen","Athens","Budapest","Reykjavik","Dublin","Rome","Amsterdam","Oslo","Warsaw","Lisabon","Bern","Kiev","Stockholm","Washington","New York","Sacramento","Los angeles","Chicago","Houston","Phoenix","Philadelphia","Vancouver","Ottawa","Buenos Aires","Brasilia","Santiago","Bogota","Ciudad de Mexico","Asuncion","Lima","Montevideo","Kabul","Dhaka","Peking","Tiflis","New Delhi","Jakarta","Teheran","Baghdad","Jerusalem","Tokyo","Kuala Lumpur","Ulan Bator","Kathmandu","Singapure","Seoul","Ankara","Abu Dhabi","Algiers","Luanda","Cairo","Nairobi","Tripoli","WindHoek","Pretoria","Canberra","Wellington"]
+  cities.sort((a,b)=> a.localeCompare(b))//filtra el array alfabeticamente
+  
   const [selectedCity, setCity] = React.useState("Madrid")
 
   const [latitude,setLatitude]= React.useState(0);
@@ -82,7 +85,9 @@ function WeatherProvider(props){
             unitLetter,
             tUnit,
             setSelectedIndex,
-            selectedDayIndex
+            selectedDayIndex,
+            setSelectedDayDate,
+            selectedDayDate
         }}>{props.children}</WeatherContext.Provider>
     )
 }

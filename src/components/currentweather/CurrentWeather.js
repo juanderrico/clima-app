@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./CurrentWeather.module.css"
 import { WeatherContext } from "../weathercontext/WeatherContext.js";
 import { WiCloud, WiCloudy,WiDaySunny, WiFog, WiSprinkle, WiThunderstorm,WiRain,WiSnow,WiShowers,WiSnowWind } from "react-icons/wi";
-import {renderImage, weekday} from "../weathercontext/setimage.js"
+import {renderImage, weekday, setbackground} from "../weathercontext/setimage.js"
 function CurrentWeather({setOpenModal}){
     const onClick= ()=> {
         setOpenModal(true)
@@ -14,7 +14,7 @@ function CurrentWeather({setOpenModal}){
     
     const {locationData,loading,selectedCity,unitLetter} = React.useContext(WeatherContext)
     let response={weathercode:"", image:<WiCloud></WiCloud>};
-    
+    const [backgroundColor, setbackgroundColor]= React.useState("rgb(45, 223, 223)")
     const [weathercode,setWeatherCode]=React.useState("")
     const [image,setimage]=React.useState("<WiCloud></WiCloud>")
    
@@ -23,10 +23,13 @@ function CurrentWeather({setOpenModal}){
     
     useEffect(()=>{
     if(!loading){
-
+    
     setDay(weekday(d.getDay()))
     response= renderImage(locationData, loading,0,styles.img)
     setWeatherCode(response.weathercode)
+    setbackgroundColor(setbackground(response.weathercode))
+    console.log(weathercode)
+    console.log(backgroundColor)
     setimage(response.image)}
     },[locationData])
 
@@ -37,7 +40,7 @@ function CurrentWeather({setOpenModal}){
 
     return (
 
-        <div className={styles.container}>
+        <div className={styles.container} style={{'background':backgroundColor}}>
             <button className={styles.openModal} onClick={onClick}>Seleccionar ciudad</button>
             {!loading && <div className={styles.currentC}>
             <div>

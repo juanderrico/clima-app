@@ -90,5 +90,30 @@ function windDirection(wind,style){
         
        
     }
+function setbackground(weathercode){
+    switch(weathercode){
+        case "Soleado":
+            return "linear-gradient(0deg, rgba(41,241,237,1) 71%, rgba(208,200,5,1) 95%)";
+        case "Nieve":
+        case "Nieve fuerte":
+        case "Aguanieve":
+            return "linear-gradient(0deg, rgba(255,255,255,1) 12%, rgba(84,84,84,1) 55%)";
+        case "Parcialmente nublado":
+        case "Nublado":
+            return "linear-gradient(0deg, rgba(162,162,162,1) 0%, rgba(41,42,42,1) 69%)";
+        case "Tormentas":
+        case "Cellisca":
+            return "linear-gradient(331deg, rgba(57,57,55,1) 43%, rgba(153,163,163,1) 57%, rgba(211,213,36,1) 59%, rgba(153,163,163,1) 62%, rgba(153,163,163,1) 70%, rgba(211,213,36,1) 73%, rgba(153,163,163,1) 75%, rgba(57,57,55,1) 82%)";
+        case "Llovizna":
+        case "Lluvia":
+        case "Chaparrones":
+            return "linear-gradient(0deg, rgba(27,70,199,1) 12%, rgba(84,84,84,1) 59%)";
+        case "Niebla":
+            return "radial-gradient(circle, rgba(52,52,52,1) 4%, rgba(105,105,105,1) 46%, rgba(62,62,62,1) 83%)";
 
-export {renderImage, weekday, windDirection}
+
+    }
+
+
+}
+export {renderImage, weekday, windDirection, setbackground}

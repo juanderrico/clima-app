@@ -15,7 +15,7 @@ function App() {
         {value =>(<div className="main"><div className="upperSide">
       <CurrentWeather setOpenModal={setOpenModal} className="cWeather"></CurrentWeather>
       <WeekWeather ></WeekWeather></div>
-      <SelectedDayWeather></SelectedDayWeather>
+      <div className="downside"><SelectedDayWeather></SelectedDayWeather></div>
       {openModal && <SelectLocation><SearchBar setOpenModal={setOpenModal}></SearchBar></SelectLocation>}
     </div>
     )}
