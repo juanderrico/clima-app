@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./WeekWeather.module.css"
 import {DailyWeather} from "../dailyweather/DailyWeather.js"
 import { WeatherContext } from "../weathercontext/WeatherContext.js";
-function WeekWeather (){
+function WeekWeather ({children}){
     const {locationData, loading,settUnit,unitLetter} = React.useContext(WeatherContext)
     let index=1;
     let list=[]

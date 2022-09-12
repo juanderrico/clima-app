@@ -16,7 +16,7 @@ function WeatherProvider(props){
  
 
   const [selectedDayIndex,setSelectedIndex]=React.useState(0)
-
+  const [openModal, setOpenModal] = React.useState(false) // utilizado para abrir el input para filtrar ciudades
   
   const [locationData, setlocationData] = React.useState([])
   const [selectedDayDate, setSelectedDayDate]= React.useState(currentDate)
@@ -67,7 +67,7 @@ function WeatherProvider(props){
 
         
     })
-},[longitude,tUnit])//llama a la api, y se asegura que los componentes que tengan loading no sean cargados antes de que se reciba la api
+},[longitude,latitude,tUnit])//llama a la api, y se asegura que los componentes que tengan loading no sean cargados antes de que se reciba la api
 
 
     return (
@@ -87,7 +87,9 @@ function WeatherProvider(props){
             setSelectedIndex,
             selectedDayIndex,
             setSelectedDayDate,
-            selectedDayDate
+            selectedDayDate,
+            setOpenModal,
+            openModal
         }}>{props.children}</WeatherContext.Provider>
     )
 }
