@@ -10,7 +10,14 @@ import {SelectLocation} from "../selectLocation/SelectLocation.js"
 
 function AppUI(){
     
-    const {locationData,loading,setOpenModal,openModal}= React.useContext(WeatherContext)
+    const {locationData,
+           loading,
+           setOpenModal,
+           openModal,
+           settUnit,
+           selectedCity,
+           selectedDayIndex,
+           selectedDayDate}= React.useContext(WeatherContext)
         let list=[]
 
 
@@ -27,18 +34,25 @@ function AppUI(){
                 <div className="main">
                   <div className="upperSide">
             
-                    <CurrentWeather setOpenModal={setOpenModal} className="cWeather">
+                    <CurrentWeather 
+                      setOpenModal={setOpenModal} 
+                      locationData={locationData}
+                      selectedCity={selectedCity}
+                      className="cWeather">
                     </CurrentWeather>
             
-                   <WeekWeather>
-                   {list}
+                   <WeekWeather 
+                      settUnit={settUnit} 
+                      locationData={locationData}>
+
+                      {list}
                    </WeekWeather>
                   </div>
-                 
-                   <SelectedDayWeather>
+                   <SelectedDayWeather
+                      locationData={locationData}
+                      selectedDayIndex={selectedDayIndex}
+                      selectedDayDate={selectedDayDate}>
                    </SelectedDayWeather>
-                 
-      
                  {openModal && 
                  <SelectLocation>
                     <SearchBar setOpenModal={setOpenModal}>

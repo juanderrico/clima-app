@@ -15,15 +15,22 @@ const onSelect= (value) =>{
 let list=[]
 searchResults.map((value)=>{
     list.push(
-    <button className={styles.city} onClick={()=>onSelect({value})}>{value}</button>)
+    <button key={value} className={styles.city} onClick={()=>onSelect({value})}>{value}</button>)
 })
-return (<div className={styles.ModalBackground}>
+return (
+<div className={styles.ModalBackground}>
     <div className={styles.citiesList}>
-    <h1 className={styles.upperText}>Escoja una ciudad</h1>
-    <input className={styles.searchInput} value={searchValue} onChange={onValueChange}>
-    </input>
-{list}</div>
-<button className={styles.cancelbutton} onClick={()=>setOpenModal(false)}>X</button></div>
+        <h1 className={styles.upperText}>
+            Escoja una ciudad
+        </h1>
+        <input className={styles.searchInput} value={searchValue} onChange={onValueChange}>
+        </input>
+        {list}
+    </div>
+    <button className={styles.cancelbutton} onClick={()=>setOpenModal(false)}>
+        X
+    </button>
+</div>
 )
 }
 

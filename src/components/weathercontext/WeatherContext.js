@@ -6,15 +6,14 @@ const WeatherContext= React.createContext();
 
 function WeatherProvider(props){
   const date = new Date();
-  const day = String(date.getDate()).padStart(2, '0');
+  let day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0'); 
   const year = date.getFullYear();
   const currentDate =`${year}-${month}-${day}`
   let maxDate = new Date(date);
-  const nday= maxDate.getDate()+6
-  maxDate=`${year}-${month}-${nday}`
+  day = String(date.getDate()+6).padStart(2, '0');
+  maxDate=`${year}-${month}-${day}`
  
-
   const [selectedDayIndex,setSelectedIndex]=React.useState(0)
   const [openModal, setOpenModal] = React.useState(false) // utilizado para abrir el input para filtrar ciudades
   
@@ -25,10 +24,8 @@ function WeatherProvider(props){
   cities.sort((a,b)=> a.localeCompare(b))//filtra el array alfabeticamente
   
   const [selectedCity, setCity] = React.useState("Madrid")
+  const [coordenadas, setCoordenadas]=React.useState({longitud:0,latitud:0})
 
-  const [latitude,setLatitude]= React.useState(0);
-  const [longitude,setLongitude]= React.useState(0);
-  
   let searchResults=[]
   const [searchValue, setSearchValue]= React.useState("");
   if (!searchValue.length>=1){
@@ -44,17 +41,13 @@ function WeatherProvider(props){
   
   const [tUnit,settUnit]=React.useState("celsius")
  
-  let i={longitud:0,latitud:0};
-  
   useEffect(()=>{
-    i=locationSet(selectedCity)
-    setLatitude(i.latitud)
-    setLongitude(i.longitud)
+    setCoordenadas({...locationSet(selectedCity)})
   },[selectedCity])
 
   useEffect(()=> {
 
-    const API= `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation,weathercode&daily=weathercode,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,windspeed_10m_max,winddirection_10m_dominant&temperature_unit=${tUnit}&timezone=auto&start_date=${currentDate}&end_date=${maxDate}`;
+    const API= `https://api.open-meteo.com/v1/forecast?latitude=${coordenadas.latitud}&longitude=${coordenadas.longitud}&hourly=temperature_2m,precipitation,weathercode&daily=weathercode,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,windspeed_10m_max,winddirection_10m_dominant&temperature_unit=${tUnit}&timezone=auto&start_date=${currentDate}&end_date=${maxDate}`;
       fetch(`${API}`)
       . then(response=>response.json())
       .then((data)=>{
@@ -63,13 +56,12 @@ function WeatherProvider(props){
 
         
     })
-},[longitude,latitude,tUnit])//llama a la api, y se asegura que los componentes que tengan loading no sean cargados antes de que se reciba la api
+},[coordenadas,tUnit])//llama a la api, y se asegura que los componentes que tengan loading no sean cargados antes de que se reciba la api
 
 
     return (
         <WeatherContext.Provider value={{
             locationData,
-            setlocationData,
             loading,
             searchValue,
             setSearchValue,

@@ -31,15 +31,26 @@ function DailyWeather ({reference}) {
         },[locationData])
     
     return (
-        <button className={styles.selectDay} onClick={()=>{setSelectedIndex(index)
-            setSelectedDayDate(currentDate)}}>
-        <div className={styles.dailycontainer}>
-             <div><h2 className={styles.weekday }>{dayoftheweek}</h2>{image}
+<button className={styles.selectDay} onClick={()=>{setSelectedIndex(index);setSelectedDayDate(currentDate)}}>
+    <div className={styles.dailycontainer}>
+        <div>
+            <h2 className={styles.weekday }>
+                {dayoftheweek}
+            </h2>
+            {image}
             <div className={styles.temperaturediv}>
-            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_max[index])}{locationData.daily_units.apparent_temperature_max}</h2>
-            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_min[index])}{locationData.daily_units.apparent_temperature_max}</h2>
-             </div></div>
-        </div></button>
+                <h2 className={styles.temperature}>
+                    {Math.round(locationData.daily.apparent_temperature_max[index])}
+                    {locationData.daily_units.apparent_temperature_max}
+                </h2>
+                <h2 className={styles.temperature}>
+                    {Math.round(locationData.daily.apparent_temperature_min[index])}
+                    {locationData.daily_units.apparent_temperature_max}
+                </h2>
+            </div>
+        </div>
+    </div>
+</button>
     )
 
 }
