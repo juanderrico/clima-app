@@ -1,4 +1,5 @@
 import React from "react";
+import "../../App.css"
 import { WeatherContext } from "../weathercontext/WeatherContext";
 import { CurrentWeather } from "../currentweather/CurrentWeather.js";
 import {WeekWeather} from "../weekweather/WeekWeather.js";
@@ -9,50 +10,42 @@ import {SelectLocation} from "../selectLocation/SelectLocation.js"
 
 function AppUI(){
     
-    const {locationData,
-        setlocationData,
-        loading,
-        searchValue,
-        setSearchValue,
-        searchResults,
-        setCity,
-        selectedCity,
-        setLoading,
-        settUnit,
-        unitLetter,
-        tUnit,
-        setSelectedIndex,
-        selectedDayIndex,
-        setSelectedDayDate,
-        selectedDayDate,
-        setOpenModal,
-        openModal}= React.useContext(WeatherContext)
-        let index = 1;
-        return (
-          
+    const {locationData,loading,setOpenModal,openModal}= React.useContext(WeatherContext)
+        let list=[]
+
+
+        if(!loading){
+            for(let reference of locationData.daily.time){
+        list.push(
+            <DailyWeather reference={reference} key={reference}></DailyWeather>
+        )
+        }list.pop()}
+        
+       
+        return (<React.Fragment>
+                {!loading &&
                 <div className="main">
                   <div className="upperSide">
             
-                    <CurrentWeather setOpenModal={setOpenModal} className="cWeather"></CurrentWeather>
+                    <CurrentWeather setOpenModal={setOpenModal} className="cWeather">
+                    </CurrentWeather>
             
                    <WeekWeather>
-                   {locationData.map(()=>{
-                    <DailyWeather index={index}></DailyWeather>;{index++}
-                })}
+                   {list}
                    </WeekWeather>
                   </div>
-                  <div className="downside">
+                 
                    <SelectedDayWeather>
                    </SelectedDayWeather>
-                 </div>
+                 
       
                  {openModal && 
                  <SelectLocation>
                     <SearchBar setOpenModal={setOpenModal}>
                     </SearchBar>
                  </SelectLocation>}
-               </div>
-           
+               </div>}
+               </React.Fragment>
         );
       
 }

@@ -4,14 +4,15 @@ import { WeatherContext } from "../weathercontext/WeatherContext.js";
 import { WiCloud } from "react-icons/wi";
 import {renderImage, weekday} from "../weathercontext/setimage.js"
 import { useEffect, useState } from "react";
-import {WiCloudy,WiDaySunny, WiFog, WiSprinkle, WiThunderstorm,WiRain,WiSnow,WiShowers,WiSnowWind } from "react-icons/wi";
 
-function DailyWeather ({index}) {
 
-    const {locationData, loading,unitLetter, setSelectedIndex, setSelectedDayDate} = React.useContext(WeatherContext)
+function DailyWeather ({reference}) {
+
+    const {locationData, setSelectedIndex, setSelectedDayDate} = React.useContext(WeatherContext)
     let response={weathercode:"", image:<WiCloud></WiCloud>};
     const [dayoftheweek,setDay]=React.useState("")
-    
+    let index= locationData.daily.time.indexOf(reference) + 1
+
     const date = new Date();
     const day = String(date.getDate()+index+1).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -20,24 +21,24 @@ function DailyWeather ({index}) {
 
     const [image,setimage]=React.useState("<WiCloud></WiCloud>")
     useEffect(()=>{
-        if(!loading){
+        
        
         setDay(weekday(currentDate.getDay()))
         
-        response= renderImage(locationData, loading,index,styles.img)
+        response= renderImage(locationData, index,styles.img)
         
-        setimage(response.image)}
+        setimage(response.image)
         },[locationData])
     
     return (
         <button className={styles.selectDay} onClick={()=>{setSelectedIndex(index)
             setSelectedDayDate(currentDate)}}>
         <div className={styles.dailycontainer}>
-            {!loading && <div><h2 className={styles.weekday }>{dayoftheweek}</h2>{image}
+             <div><h2 className={styles.weekday }>{dayoftheweek}</h2>{image}
             <div className={styles.temperaturediv}>
-            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_max[index])}°{unitLetter}</h2>
-            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_min[index])}°{unitLetter}</h2>
-             </div></div>}
+            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_max[index])}{locationData.daily_units.apparent_temperature_max}</h2>
+            <h2 className={styles.temperature}>{Math.round(locationData.daily.apparent_temperature_min[index])}{locationData.daily_units.apparent_temperature_max}</h2>
+             </div></div>
         </div></button>
     )
 

@@ -12,17 +12,17 @@ function SelectedDayWeather(){
     let day= new Date(selectedDayDate);
     let response;
     useEffect(()=>{
-        if(!loading){
+        
             setselectedDay(weekday(day.getDay()))
             response=windDirection(locationData.daily.winddirection_10m_dominant[selectedDayIndex],styles.wind)
             setWindDirection(response.direction)
             setWindImage(response.image)
-            }},[selectedDayIndex,locationData])
+            },[selectedDayIndex,locationData])
 
             
     return(
 
-    <div>{!loading &&
+    <div>
         <div>
         <h1 className={styles.title}>Datos del dia seleccionado:</h1>
         <h1 className={styles.date}>{locationData.daily.time[selectedDayIndex]}-{selectedDay}</h1>
@@ -45,7 +45,7 @@ function SelectedDayWeather(){
             {windImage}
             <h1 className={styles.windDato} >{windDir}</h1></div>
 
-        </div></div>}
+        </div></div>
     </div>)
 }
 

@@ -8,10 +8,10 @@ function App() {
     <WeatherProvider>
 
       <WeatherContext.Consumer>
-        {value =>{
+        {value =>(<AppUI></AppUI>)
           
-        }}
-      <AppUI></AppUI>
+        }
+      
       </WeatherContext.Consumer>
     </WeatherProvider>
   );

@@ -41,13 +41,9 @@ function WeatherProvider(props){
       return citiesFilter.includes(searchFilter)
     })
   }//filtra en el array para buscar la ciudad que se esta buscando
+  
   const [tUnit,settUnit]=React.useState("celsius")
-  let unitLetter="C"
-  if(tUnit==="celsius"){
-    unitLetter="C"
-  } else{
-    unitLetter="F"
-  }
+ 
   let i={longitud:0,latitud:0};
   
   useEffect(()=>{
@@ -80,9 +76,7 @@ function WeatherProvider(props){
             searchResults,
             setCity,
             selectedCity,
-            setLoading,
             settUnit,
-            unitLetter,
             tUnit,
             setSelectedIndex,
             selectedDayIndex,

@@ -1,23 +1,22 @@
 .upperSide  {
   display: flex;
   flex-direction: row;
-  
+  font-family: Georgia, serif;
 }
 .main{
   display: flex;
   flex-direction: column;
+  
 }
 html{
   background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
   width: 100%;
   height: 100%;
+  
 }
-.downside{
-  min-height: 100%;
 
-}
-@media(width <= 720px){
+@media(width <= 830px){
   .upperSide{
     flex-direction: column;
   }

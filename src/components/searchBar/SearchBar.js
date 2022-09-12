@@ -2,7 +2,7 @@ import React from "react";
 import { WeatherContext } from "../weathercontext/WeatherContext.js";
 import styles from "./SearchBar.module.css"
 function SearchBar({setOpenModal}){
-    const {setSearchValue, searchValue,setLoading, searchResults, setCity, selectedCity} = React.useContext(WeatherContext)
+    const {setSearchValue, searchValue, searchResults, setCity} = React.useContext(WeatherContext)
 const onValueChange= (event) => {
     setSearchValue(event.target.value);
     }

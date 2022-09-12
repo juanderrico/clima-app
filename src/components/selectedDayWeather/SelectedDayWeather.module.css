@@ -28,6 +28,7 @@
     width: 40px;
     height: 40px;
     margin: 0;
+    border: 2px solid black;
 }
 .windDato{margin: 0;
     font-size: 18px;    }
@@ -38,6 +39,14 @@
     }
     .dato{
         font-size: 14px;
+    }
+}
+@media(720px <= width <= 830px  ){
+    .windDato{
+        font-size: 14px;
+    }
+    .dato{
+        font-size: 20px;
     }
 }
 

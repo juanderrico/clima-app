@@ -1,8 +1,8 @@
 import React from "react";
 import { WiSleet,WiDaySleetStorm,WiDirectionUpLeft,WiDirectionUpRight,WiDirectionDownRight,WiDirectionDownLeft,WiDirectionUp,WiDirectionLeft,WiDirectionDown,WiDirectionRight, WiCloud, WiCloudy,WiDaySunny, WiFog, WiSprinkle, WiThunderstorm,WiRain,WiSnow,WiShowers,WiSnowWind } from "react-icons/wi";
-function renderImage (locationData, loading,index,styles) {
+function renderImage (locationData, index,styles) {
 
-  if(!loading){
+  
   
   switch(locationData.daily.weathercode[index]){
       case 0: 
@@ -46,7 +46,7 @@ function renderImage (locationData, loading,index,styles) {
       case 96: 
       case 99:
           return{weathercode:"Cellisca" ,image:<WiDaySleetStorm className={styles}/>}
-   }}}
+   }}
 
    function weekday(date){
     switch(date){
