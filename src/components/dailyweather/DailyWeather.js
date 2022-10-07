@@ -33,7 +33,7 @@ function DailyWeather ({reference}) {
     return (
 <button className={styles.selectDay} onClick={()=>{setSelectedIndex(index);setSelectedDayDate(currentDate)}}>
     <div className={styles.dailycontainer}>
-        <div>
+        
             <h2 className={styles.weekday }>
                 {dayoftheweek}
             </h2>
@@ -48,7 +48,7 @@ function DailyWeather ({reference}) {
                     {locationData.daily_units.apparent_temperature_max}
                 </h2>
             </div>
-        </div>
+        
     </div>
 </button>
     )

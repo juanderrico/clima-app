@@ -47,7 +47,7 @@ function WeatherProvider(props){
 
   useEffect(()=> {
 
-    const API= `https://api.open-meteo.com/v1/forecast?latitude=${coordenadas.latitud}&longitude=${coordenadas.longitud}&hourly=temperature_2m,precipitation,weathercode&daily=weathercode,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,windspeed_10m_max,winddirection_10m_dominant&temperature_unit=${tUnit}&timezone=auto&start_date=${currentDate}&end_date=${maxDate}`;
+    const API= `https://api.open-meteo.com/v1/forecast?latitude=${coordenadas.latitud}&longitude=${coordenadas.longitud}&hourly=temperature_2m,precipitation,weathercode,windspeed_10m,windspeed_80m,windspeed_120m,windspeed_180m,winddirection_10m,winddirection_80m,winddirection_120m,winddirection_180m,temperature_80m,temperature_120m,temperature_180m,soil_temperature_0cm,soil_temperature_6cm,soil_temperature_18cm,soil_temperature_54cm,soil_moisture_0_1cm,soil_moisture_1_3cm,soil_moisture_3_9cm,soil_moisture_9_27cm,soil_moisture_27_81cm&daily=weathercode,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=${tUnit}&timezone=auto&start_date=${currentDate}&end_date=${maxDate}`;
       fetch(`${API}`)
       . then(response=>response.json())
       .then((data)=>{

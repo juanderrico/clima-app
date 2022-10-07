@@ -6,46 +6,46 @@ function renderImage (locationData, index,styles) {
   
   switch(locationData.daily.weathercode[index]){
       case 0: 
-          return{weathercode:"Soleado", image:<WiDaySunny className={styles}/>}
+          return{weathercode:"Soleado", image:<WiDaySunny className={styles} alt="Soleado"/>}
       case 1:
       case 2: 
-          return{weathercode:"Parcialmente nublado",image: <WiCloud className={styles}/>}
+          return{weathercode:"Parcialmente nublado",image: <WiCloud className={styles} alt="Parcialmente nublado"/>}
       case 3: 
-          return{weathercode:"Nublado", image:<WiCloudy className={styles}/>}
+          return{weathercode:"Nublado", image:<WiCloudy className={styles} alt="Nublado"/>}
       case 45:
       case 48:
           
-          return{weathercode:"Niebla",image: <WiFog className={styles}/>}
+          return{weathercode:"Niebla",image: <WiFog className={styles} alt="Niebla"/>}
       case 51: 
       case 53: 
       case 55:
-          return{weathercode:"Llovizna",image: <WiSprinkle className={styles}/>}
+          return{weathercode:"Llovizna",image: <WiSprinkle className={styles} alt="Llovizna"/>}
       case 61:
       case 63:
       case 65:
-        return{weathercode:"Lluvia",image: <WiRain className={styles}/>}
+        return{weathercode:"Lluvia",image: <WiRain className={styles} alt="Lluvia"/>}
     case 56:
     case 57:
     case 66:
     case 67:
-          return{weathercode:"Aguanieve",image: <WiSleet className={styles}/>}
+          return{weathercode:"Aguanieve",image: <WiSleet className={styles} alt="Aguanieve"/>}
       case 71:
       case 73:
       case 75:
       case 77:
-          return{weathercode:"Nieve", image:<WiSnow className={styles}/>}
+          return{weathercode:"Nieve", image:<WiSnow className={styles} alt="Nieve"/>}
       case 80:
       case 81:
       case 82:
-          return{weathercode:"Chaparrones", image:<WiShowers className={styles}/>}
+          return{weathercode:"Chaparrones", image:<WiShowers className={styles} alt="Chaparrones"/>}
       case 85:
       case 86:
-          return{weathercode:"Nieve fuerte", image:<WiSnowWind className={styles}/>}
+          return{weathercode:"Nieve fuerte", image:<WiSnowWind className={styles} alt="Nieve Fuerte"/>}
       case 95:
-        return{weathercode:"Tormentas" ,image:<WiThunderstorm className={styles}/>}
+        return{weathercode:"Tormentas" ,image:<WiThunderstorm className={styles} alt="Tormentas"/>}
       case 96: 
       case 99:
-          return{weathercode:"Cellisca" ,image:<WiDaySleetStorm className={styles}/>}
+          return{weathercode:"Cellisca" ,image:<WiDaySleetStorm className={styles} alt="Celliscas"/>}
    }}
 
    function weekday(date){
@@ -103,7 +103,7 @@ function setbackground(weathercode){
             return "linear-gradient(0deg, rgba(162,162,162,1) 0%, rgba(41,42,42,1) 69%)";
         case "Tormentas":
         case "Cellisca":
-            return "linear-gradient(331deg, rgba(57,57,55,1) 43%, rgba(153,163,163,1) 57%, rgba(211,213,36,1) 59%, rgba(153,163,163,1) 62%, rgba(153,163,163,1) 70%, rgba(211,213,36,1) 73%, rgba(153,163,163,1) 75%, rgba(57,57,55,1) 82%)";
+            return "linear-gradient(331deg, rgba(100,100,100,1) 43%, rgba(153,163,163,1) 57%, rgba(211,213,36,1) 59%, rgba(153,163,163,1) 62%, rgba(153,163,163,1) 70%, rgba(211,213,36,1) 73%, rgba(153,163,163,1) 75%, rgba(100,100,100,1) 82%)";
         case "Llovizna":
         case "Lluvia":
         case "Chaparrones":

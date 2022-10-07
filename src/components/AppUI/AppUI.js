@@ -7,10 +7,10 @@ import { SelectedDayWeather } from "../selectedDayWeather/SelectedDayWeather";
 import { SearchBar } from "../searchBar/SearchBar";
 import {DailyWeather} from "../dailyweather/DailyWeather.js"
 import {SelectLocation} from "../selectLocation/SelectLocation.js"
-
+import {Header} from "../header/header.js"
 function AppUI(){
     
-    const {locationData,
+   const {locationData,
            loading,
            setOpenModal,
            openModal,
@@ -18,22 +18,23 @@ function AppUI(){
            selectedCity,
            selectedDayIndex,
            selectedDayDate}= React.useContext(WeatherContext)
-        let list=[]
+   let list=[]
 
 
         if(!loading){
             for(let reference of locationData.daily.time){
         list.push(
-            <DailyWeather reference={reference} key={reference}></DailyWeather>
+            <DailyWeather reference={reference} key={reference} locationData={locationData}></DailyWeather>
         )
         }list.pop()}
         
        
         return (<React.Fragment>
+               <Header></Header>
                 {!loading &&
                 <div className="main">
                   <div className="upperSide">
-            
+
                     <CurrentWeather 
                       setOpenModal={setOpenModal} 
                       locationData={locationData}
