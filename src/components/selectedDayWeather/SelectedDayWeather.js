@@ -4,6 +4,8 @@ import { WeatherContext } from "../weathercontext/WeatherContext";
 import styles from "./SelectedDayWeather.module.css"
 import {windDirection, weekday} from "../weathercontext/setimage.js"
 import { useEffect, useState } from "react";
+import { SelectedDayInfoLoading } from "../loadingskeleton/SelectedDayInfoLoading";
+import Skeleton from 'react-loading-skeleton'
 function SelectedDayWeather(props){
     const [windImage, setWindImage]= React.useState()
 
@@ -13,11 +15,11 @@ function SelectedDayWeather(props){
     let day= new Date(props.selectedDayDate);
     let response;
     useEffect(()=>{
-        
+            if(!props.loading){
             setselectedDay(weekday(day.getDay()))
             response=windDirection(props.locationData.daily.winddirection_10m_dominant[props.selectedDayIndex],styles.wind)
             setWindDirection(response.direction)
-            setWindImage(response.image)
+            setWindImage(response.image)}
             },[props.selectedDayIndex,props.locationData])
 
             
@@ -29,10 +31,13 @@ function SelectedDayWeather(props){
                 Datos del dia seleccionado:
             </h1>
             <h1 className={styles.date}>
-                {props.locationData.daily.time[props.selectedDayIndex]}-{selectedDay}
+                {!props.loading && <p>
+                {props.locationData.daily.time[props.selectedDayIndex]}-{selectedDay}</p>}
+                {props.loading && <Skeleton width={200} height={20}/>}
             </h1>
             <div className={styles.infocontainer}>
-                <SelectedDayInfo 
+                
+                {!props.loading && <React.Fragment><SelectedDayInfo 
                 tipoDato="Horas de precipitacion:"
                 dato={`${props.locationData.daily.precipitation_hours[props.selectedDayIndex]} Horas`}>
                 </SelectedDayInfo>
@@ -50,7 +55,13 @@ function SelectedDayWeather(props){
                 tipoDato="Direccion del viento:"
                 dato={`${windDir} `}>
                     {windImage}
-                </SelectedDayInfo>
+                </SelectedDayInfo></React.Fragment>}
+                {props.loading && <React.Fragment>
+                    <SelectedDayInfoLoading></SelectedDayInfoLoading>
+                    <SelectedDayInfoLoading></SelectedDayInfoLoading>
+                    <SelectedDayInfoLoading></SelectedDayInfoLoading>
+                    <SelectedDayInfoLoading></SelectedDayInfoLoading>
+                    </React.Fragment>}
             </div>
         </div>
     )

@@ -11,8 +11,12 @@ function WeatherProvider(props){
   const year = date.getFullYear();
   const currentDate =`${year}-${month}-${day}`
   let maxDate = new Date(date);
-  day = String(date.getDate()+6).padStart(2, '0');
-  maxDate=`${year}-${month}-${day}`
+ // day = String(date.getDate()+6).padStart(2, '0');
+  maxDate.setDate(date.getDate()+6)
+  let maxday = String(maxDate.getDate()).padStart(2, '0');
+  const maxmonth = String(maxDate.getMonth() + 1).padStart(2, '0'); 
+  const maxyear = maxDate.getFullYear();
+   maxDate =`${maxyear}-${maxmonth}-${maxday}`
  
   const [selectedDayIndex,setSelectedIndex]=React.useState(0)
   const [openModal, setOpenModal] = React.useState(false) // utilizado para abrir el input para filtrar ciudades
@@ -25,7 +29,7 @@ function WeatherProvider(props){
   
   const [selectedCity, setCity] = React.useState("Madrid")
   const [coordenadas, setCoordenadas]=React.useState({longitud:0,latitud:0})
-
+  const [error,setError]= React.useState(false)
   let searchResults=[]
   const [searchValue, setSearchValue]= React.useState("");
   if (!searchValue.length>=1){
@@ -46,16 +50,21 @@ function WeatherProvider(props){
   },[selectedCity])
 
   useEffect(()=> {
-
-    const API= `https://api.open-meteo.com/v1/forecast?latitude=${coordenadas.latitud}&longitude=${coordenadas.longitud}&hourly=temperature_2m,precipitation,weathercode,windspeed_10m,windspeed_80m,windspeed_120m,windspeed_180m,winddirection_10m,winddirection_80m,winddirection_120m,winddirection_180m,temperature_80m,temperature_120m,temperature_180m,soil_temperature_0cm,soil_temperature_6cm,soil_temperature_18cm,soil_temperature_54cm,soil_moisture_0_1cm,soil_moisture_1_3cm,soil_moisture_3_9cm,soil_moisture_9_27cm,soil_moisture_27_81cm&daily=weathercode,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=${tUnit}&timezone=auto&start_date=${currentDate}&end_date=${maxDate}`;
-      fetch(`${API}`)
-      . then(response=>response.json())
+    setLoading(true)
+    const API= `https://api.open-meteo.com/v1/forecast?latitude=${coordenadas.latitud}&longitude=${coordenadas.longitud}&hourly=temperature_2m,weathercode&daily=weathercode,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&temperature_unit=${tUnit}&start_date=${currentDate}&end_date=${maxDate}`
+      window.
+      fetch(API)
+      .then(response=>response.json())
+      
       .then((data)=>{
         setlocationData(data)
         setLoading(false)
 
         
-    })
+    }).catch((err) => {
+      setError(err)
+      
+    });
 },[coordenadas,tUnit])//llama a la api, y se asegura que los componentes que tengan loading no sean cargados antes de que se reciba la api
 
 
@@ -75,7 +84,8 @@ function WeatherProvider(props){
             setSelectedDayDate,
             selectedDayDate,
             setOpenModal,
-            openModal
+            openModal,
+            error
         }}>{props.children}</WeatherContext.Provider>
     )
 }

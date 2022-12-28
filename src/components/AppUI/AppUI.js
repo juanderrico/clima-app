@@ -7,7 +7,8 @@ import { SelectedDayWeather } from "../selectedDayWeather/SelectedDayWeather";
 import { SearchBar } from "../searchBar/SearchBar";
 import {DailyWeather} from "../dailyweather/DailyWeather.js"
 import {SelectLocation} from "../selectLocation/SelectLocation.js"
-import {Header} from "../header/header.js"
+import { WeekWeatherLoading } from "../loadingskeleton/WeekWeatherLoading";
+import { CurrentWeatherLoading } from "../loadingskeleton/CurrentWeatherLoading";
 function AppUI(){
     
    const {locationData,
@@ -17,7 +18,8 @@ function AppUI(){
            settUnit,
            selectedCity,
            selectedDayIndex,
-           selectedDayDate}= React.useContext(WeatherContext)
+           selectedDayDate,
+             error}= React.useContext(WeatherContext)
    let list=[]
 
 
@@ -30,9 +32,21 @@ function AppUI(){
         
        
         return (<React.Fragment>
-               <Header></Header>
+            <div className="main">
+                {loading && 
+                <React.Fragment>
+                  <div className="upperSide">
+
+                    <CurrentWeatherLoading className="cWeather">
+                    </CurrentWeatherLoading>
+            
+                   <WeekWeatherLoading>
+                      
+                   </WeekWeatherLoading>
+                  </div>
+                   </React.Fragment>}
                 {!loading &&
-                <div className="main">
+                <React.Fragment>
                   <div className="upperSide">
 
                     <CurrentWeather 
@@ -49,17 +63,19 @@ function AppUI(){
                       {list}
                    </WeekWeather>
                   </div>
-                   <SelectedDayWeather
+                    </React.Fragment>}  <SelectedDayWeather
                       locationData={locationData}
                       selectedDayIndex={selectedDayIndex}
-                      selectedDayDate={selectedDayDate}>
-                   </SelectedDayWeather>
+                      selectedDayDate={selectedDayDate}
+                      loading={loading}>
+                   </SelectedDayWeather> </div>
                  {openModal && 
                  <SelectLocation>
                     <SearchBar setOpenModal={setOpenModal}>
                     </SearchBar>
                  </SelectLocation>}
-               </div>}
+                 
+                 {error && <h1>Se ha encontrado un error de tipo{error.message}</h1>}
                </React.Fragment>
         );
       

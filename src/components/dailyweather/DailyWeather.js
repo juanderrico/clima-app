@@ -13,12 +13,13 @@ function DailyWeather ({reference}) {
     const [dayoftheweek,setDay]=React.useState("")
     let index= locationData.daily.time.indexOf(reference) + 1
 
-    const date = new Date();
-    const day = String(date.getDate()+index+1).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let date = new Date();
+    date.setDate(date.getDay()+index)
+    const day = String(date.getDate()+1).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); 
     const year = date.getFullYear();
     const currentDate =new Date(`${year}-${month}-${day}`)
-
+    
     const [image,setimage]=React.useState("<WiCloud></WiCloud>")
     useEffect(()=>{
         

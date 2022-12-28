@@ -3,7 +3,8 @@
     flex-direction: column;
     width: 30%;
     height: 400px;
-    
+    align-items: center;
+    background-color: aquamarine;
 }
 .img {
     height: 200px;
@@ -21,7 +22,7 @@
 }
 .currentC{
     display: flex;
-    
+    margin-top: 20px;
     flex-direction: column;
 }
 .openModal{
@@ -32,8 +33,10 @@
     font-weight: bold;
     background-color: aquamarine;
     border-color: lightslategray ;
-    margin-left: 8px;
-    margin-top: 20px;
+    left: 20px;
+    top:20px;
+    max-width: 200px;
+    position: absolute;
    
 }
 h3{

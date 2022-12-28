@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import styles from "./CurrentWeather.module.css"
-import { WeatherContext } from "../weathercontext/WeatherContext.js";
+
 import {renderImage, weekday, setbackground} from "../weathercontext/setimage.js"
 
 function CurrentWeather(props){
@@ -43,7 +43,7 @@ function CurrentWeather(props){
             </button>
             <div className={styles.currentC}>
                 <div>
-                {image}
+                {image} 
                 </div>
                 <h2 className={styles.weathercode}>
                     {weathercode}

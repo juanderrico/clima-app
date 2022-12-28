@@ -9,7 +9,7 @@
 .upperSide  {
   display: flex;
   flex-direction: row;
-  font-family: Georgia, serif;
+  
 }
 .main{
   display: flex;
