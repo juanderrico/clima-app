@@ -1,36 +1,37 @@
-import React from "react";
+import React,{useRef} from "react";
 import { WeatherContext } from "../weathercontext/WeatherContext.js";
 import styles from "./SearchBar.module.css"
-function SearchBar({setOpenModal}){
-    const {setSearchValue, searchValue, searchResults, setCity} = React.useContext(WeatherContext)
-const onValueChange= (event) => {
+function SearchBar(props){
+    const {setSearchValue, searchValue, searchResults, setCity,setSelectedCountry} = React.useContext(WeatherContext)
+const modalRef=useRef()
+    const onValueChange= (event) => {
     setSearchValue(event.target.value);
     }
 const onSelect= (value) =>{
-    setCity(value)
-    setOpenModal(false)
+    setSelectedCountry(value.value.country)
+    props.modalRef.current?.scrollTo({x: 0, y: 0, animated: false})
     
 
 }
 let list=[]
 searchResults.map((value)=>{
     list.push(
-    <button key={value} className={styles.city} onClick={()=>onSelect({value})}>{value}</button>)
+    <button key={value.country} className={styles.city} onClick={()=>onSelect({value})}>{value.country}</button>)
 })
 return (
-<div className={styles.ModalBackground}>
+<React.Fragment>
     <div className={styles.citiesList}>
         <h1 className={styles.upperText}>
-            Escoja una ciudad
+            Escoja un pais
         </h1>
         <input className={styles.searchInput} value={searchValue} onChange={onValueChange}>
         </input>
         {list}
     </div>
-    <button className={styles.cancelbutton} onClick={()=>setOpenModal(false)}>
+    <button className={styles.cancelbutton} onClick={()=>props.setOpenModal(false)}>
         X
     </button>
-</div>
+    </React.Fragment>
 )
 }
 

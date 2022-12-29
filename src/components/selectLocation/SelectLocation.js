@@ -1,12 +1,12 @@
 import React from "react";
 import  ReactDOM  from "react-dom";
-
-function SelectLocation({children}){
+import styles from "./SelectLocation.module.css"
+function SelectLocation(props){
 
 
     return ReactDOM.createPortal(
-        <div className="ModalBackground">
-       {children}</div>,
+        <div className={styles.ModalBackground} ref={props.modalRef}>
+       {props.children}</div>,
         document.getElementById("search")
     )
 }

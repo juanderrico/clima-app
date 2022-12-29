@@ -24,31 +24,51 @@ function WeatherProvider(props){
   const [locationData, setlocationData] = React.useState([])
   const [selectedDayDate, setSelectedDayDate]= React.useState(currentDate)
   const [loading, setLoading] = React.useState(true);
-  const cities = ["Berlin", "Paris","London","Madrid","Vienna","Brussels","Moscow","Sofia","Copenhagen","Athens","Budapest","Reykjavik","Dublin","Rome","Amsterdam","Oslo","Warsaw","Lisabon","Bern","Kiev","Stockholm","Washington","New York","Sacramento","Los angeles","Chicago","Houston","Phoenix","Philadelphia","Vancouver","Ottawa","Buenos Aires","Brasilia","Santiago","Bogota","Ciudad de Mexico","Asuncion","Lima","Montevideo","Kabul","Dhaka","Peking","Tiflis","New Delhi","Jakarta","Teheran","Baghdad","Jerusalem","Tokyo","Kuala Lumpur","Ulan Bator","Kathmandu","Singapure","Seoul","Ankara","Abu Dhabi","Algiers","Luanda","Cairo","Nairobi","Tripoli","WindHoek","Pretoria","Canberra","Wellington"]
-  cities.sort((a,b)=> a.localeCompare(b))//filtra el array alfabeticamente
+  const [countries, setCountries]=React.useState()
+  const [cities,setCities]=React.useState()
   
   const [selectedCity, setCity] = React.useState("Madrid")
   const [coordenadas, setCoordenadas]=React.useState({longitud:0,latitud:0})
   const [error,setError]= React.useState(false)
+  const [selectedCountry,setSelectedCountry]=React.useState()
+  const geoCodingAPI= `http://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=5&appid=02856c6edfa4a4a343b7b40c12bd6d33`
   let searchResults=[]
   const [searchValue, setSearchValue]= React.useState("");
+  const [cityModal,setCityModal]=React.useState(false)
   if (!searchValue.length>=1){
-    searchResults=cities;
+    searchResults=countries;
   }
   else{
-    searchResults=cities.filter(city=>{
-      const citiesFilter=city.toLowerCase()
+    searchResults=countries.filter(country=>{
+      const citiesFilter=country.country.toLowerCase()
       const searchFilter=searchValue.toLowerCase()
       return citiesFilter.includes(searchFilter)
     })
   }//filtra en el array para buscar la ciudad que se esta buscando
   
   const [tUnit,settUnit]=React.useState("celsius")
- 
   useEffect(()=>{
-    setCoordenadas({...locationSet(selectedCity)})
+    
+    if(!loading){
+      setCityModal(true)
+    setCities(countries.find(country=>country.country==selectedCountry).cities)}
+    
+  },[selectedCountry])
+  useEffect(()=>{
+    fetch(geoCodingAPI)
+    .then(response=>response.json())
+    .then(response=>{
+      setCoordenadas({latitud:response[0].lat,longitud:response[0].lon})
+      console.log(response)
+    })
   },[selectedCity])
-
+  useEffect(()=>{
+    fetch('https://countriesnow.space/api/v0.1/countries')
+    .then(response=>response.json())
+    .then(response=>{
+      setCountries(response.data)
+    console.log(countries)})
+  },[])
   useEffect(()=> {
     setLoading(true)
     const API= `https://api.open-meteo.com/v1/forecast?latitude=${coordenadas.latitud}&longitude=${coordenadas.longitud}&hourly=temperature_2m,weathercode&daily=weathercode,apparent_temperature_max,apparent_temperature_min,precipitation_sum,precipitation_hours,windspeed_10m_max,winddirection_10m_dominant&timezone=auto&temperature_unit=${tUnit}&start_date=${currentDate}&end_date=${maxDate}`
@@ -85,7 +105,12 @@ function WeatherProvider(props){
             selectedDayDate,
             setOpenModal,
             openModal,
-            error
+            error,
+            setSelectedCountry,
+            selectedCountry,
+            cityModal,
+            setCityModal,
+            cities
         }}>{props.children}</WeatherContext.Provider>
     )
 }

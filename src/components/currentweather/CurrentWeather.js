@@ -54,7 +54,7 @@ function CurrentWeather(props){
                     {props.locationData.daily_units.apparent_temperature_max}
                 </h2>
                 <h3>
-                    {dayoftheweek}- {hour}:00 - {props.selectedCity.value}
+                    {dayoftheweek}- {hour}:00 - {props.selectedCity}
                 </h3>
             </div>
         </div>

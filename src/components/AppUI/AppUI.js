@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../../App.css"
 import { WeatherContext } from "../weathercontext/WeatherContext";
 import { CurrentWeather } from "../currentweather/CurrentWeather.js";
@@ -6,6 +6,7 @@ import {WeekWeather} from "../weekweather/WeekWeather.js";
 import { SelectedDayWeather } from "../selectedDayWeather/SelectedDayWeather";
 import { SearchBar } from "../searchBar/SearchBar";
 import {DailyWeather} from "../dailyweather/DailyWeather.js"
+import { SelectedCountry } from "../selectedCountry/SelectedCountry.js";
 import {SelectLocation} from "../selectLocation/SelectLocation.js"
 import { WeekWeatherLoading } from "../loadingskeleton/WeekWeatherLoading";
 import { CurrentWeatherLoading } from "../loadingskeleton/CurrentWeatherLoading";
@@ -19,9 +20,12 @@ function AppUI(){
            selectedCity,
            selectedDayIndex,
            selectedDayDate,
+           selectedCountry,
+           cityModal,
+           cities,
              error}= React.useContext(WeatherContext)
    let list=[]
-
+    const modalRef=useRef()
 
         if(!loading){
             for(let reference of locationData.daily.time){
@@ -70,10 +74,14 @@ function AppUI(){
                       loading={loading}>
                    </SelectedDayWeather> </div>
                  {openModal && 
-                 <SelectLocation>
-                    <SearchBar setOpenModal={setOpenModal}>
+                 <SelectLocation modalRef={modalRef}>
+                    <SearchBar setOpenModal={setOpenModal} modalRef={modalRef}>
                     </SearchBar>
+                    {cityModal && <SelectedCountry
+                    country={selectedCountry}
+                    cities={cities}></SelectedCountry>}
                  </SelectLocation>}
+                 
                  
                  {error && <h1>Se ha encontrado un error de tipo{error.message}</h1>}
                </React.Fragment>
