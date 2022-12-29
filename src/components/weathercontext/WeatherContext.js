@@ -67,7 +67,7 @@ function WeatherProvider(props){
     .then(response=>response.json())
     .then(response=>{
       setCountries(response.data)
-    console.log(countries)})
+    })
   },[])
   useEffect(()=> {
     setLoading(true)
