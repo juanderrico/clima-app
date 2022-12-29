@@ -31,7 +31,7 @@ function WeatherProvider(props){
   const [coordenadas, setCoordenadas]=React.useState({longitud:0,latitud:0})
   const [error,setError]= React.useState(false)
   const [selectedCountry,setSelectedCountry]=React.useState()
-  const geoCodingAPI= `http://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=5&appid=02856c6edfa4a4a343b7b40c12bd6d33`
+  const geoCodingAPI= `https://api.openweathermap.org/geo/1.0/direct?q=${selectedCity}&limit=5&appid=02856c6edfa4a4a343b7b40c12bd6d33`
   let searchResults=[]
   const [searchValue, setSearchValue]= React.useState("");
   const [cityModal,setCityModal]=React.useState(false)
@@ -59,7 +59,7 @@ function WeatherProvider(props){
     .then(response=>response.json())
     .then(response=>{
       setCoordenadas({latitud:response[0].lat,longitud:response[0].lon})
-      console.log(response)
+      
     })
   },[selectedCity])
   useEffect(()=>{
